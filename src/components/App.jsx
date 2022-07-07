@@ -3,7 +3,7 @@ import Section from './Section';
 import Container from './Container';
 import Form from './ContactForm';
 import ContactList from './ContactsList';
-import { useSelector } from '@reduxjs/toolkit';
+
 import Filter from './Filter';
 
 function App() {
