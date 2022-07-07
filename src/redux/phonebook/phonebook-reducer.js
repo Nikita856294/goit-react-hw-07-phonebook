@@ -3,10 +3,17 @@ import { combineReducers } from 'redux';
 import * as actions from './phonebook-actions';
 
 const items = createReducer([], {
-  [actions.addContact]: (state, { payload }) => [...state, payload],
-  [actions.deleteContact]: (state, { payload }) => {
+  [actions.getContactsSuccess]: (_, { payload }) => payload,
+  [actions.addContactsSuccess]: (state, { payload }) => [...state, payload],
+  [actions.deleteContactsSuccess]: (state, { payload }) => {
     return state.filter(contact => contact.id !== payload);
   },
+});
+
+const loading = createReducer(false, {
+  [actions.addContactsSuccess]: () => false,
+  [actions.addContactsPending]: () => true,
+  [actions.addContactsError]: () => false,
 });
 
 const filter = createReducer('', {
@@ -15,5 +22,6 @@ const filter = createReducer('', {
 
 export default combineReducers({
   items,
+  loading,
   filter,
 });

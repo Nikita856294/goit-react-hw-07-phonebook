@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ContactForm, AddButton, FormLabel, FormInput } from './FormStyle';
 import { nanoid } from 'nanoid';
-import { addContact } from '../../redux/phonebook/phonebook-actions';
+import { addContact } from '../../redux/phonebook/phonebook-operation';
 import { getValueItems } from 'redux/phonebook/phonebook-selectors';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -35,11 +35,12 @@ function Form() {
       name,
       number,
     };
-    const findName = contacts.find(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
+    const findName = contacts.find(contact => {
+      console.log(contact);
+      return contact.name.toLowerCase() === name.toLowerCase();
+    });
     if (findName) {
-      return toast.info(`${name} is already in your phone book`);
+      return toast.error(`${name} is already in your phone book`);
     }
     dispatch(addContact(state));
   };
@@ -72,7 +73,9 @@ function Form() {
         />
       </FormLabel>
       <div>
-        <AddButton type="submit">Add contact</AddButton>
+        <AddButton type="submit" onSubmit={handleSubmit}>
+          Add contact
+        </AddButton>
       </div>
     </ContactForm>
   );
