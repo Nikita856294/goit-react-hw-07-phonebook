@@ -5,9 +5,9 @@ import {
   getValueItems,
   getValueFilter,
 } from '../../redux/phonebook/phonebook-selectors';
-import { getContacts } from 'redux/phonebook/phonebook-operation';
+import { getContacts,deleteContact } from 'redux/phonebook/phonebook-operation';
 
-import { deleteContact } from 'redux/phonebook/phonebook-operation';
+
 
 function ContactList() {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function ContactList() {
               {name}:{phone}
               <DeleteButton
                 type="button"
-                onClick={() => dispatch(deleteContact(id))}
+                onClick={() =>  dispatch(deleteContact(id))}
               >
                 Delete
               </DeleteButton>
