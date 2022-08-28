@@ -6,5 +6,4 @@ const changeFilter = createAction('phonebook/changeFilter');
 
 export {
   changeFilter,
-
 };
